@@ -38,7 +38,7 @@ namespace WebApiLBG.Controllers
 
             string sql1 = "";
 
-            sql1 = "SELECT[dia],[hora]";
+            sql1 = "SELECT [dia],[hora]";
             sql1 += " ,(select nombrecorto from equipos where equipos.id=codLoc) 'LOCAL'";
             sql1 += " ,(select nombrecorto from equipos where equipos.id=codVis) 'VISITANTE'";
             sql1 += " ,(SELECT SUM(GOLES) FROM JUGADOS WHERE JUGADOS.ID_PARTIDO = PARTIDOS.ID AND JUGADOS.ID_EQUIPO = PARTIDOS.CODLOC) 'GOLESL'";
@@ -50,7 +50,7 @@ namespace WebApiLBG.Controllers
             sql1 += " ,[pl],[pv],[categoria],[jugado],(SELECT NOMBRECORTO FROM EQUIPOS WHERE EQUIPOS.ID=PARTIDOS.COD_VOCAL) 'VOCAL',codLoc,codVis,estado,DATEDIFF(ss, [dia_partido], GETDATE())/60";
             sql1 += " ,[golesl],[golesv],[jugado]";
             sql1 += " FROM partidos(nolock) where Campeonato=" + campeonato;
-            sql1 += " and DATEPART(dy, dia)>=(select top 1 DATEPART(dy, dia) from partidos where campeonato = " + campeonato + " order by CAST(dia as datetime) desc) - 2";
+            sql1 += " and DATEPART(dy, dia)>=(select top 1 DATEPART(dy, dia) from partidos where campeonato = " + campeonato + " order by CAST(dia as datetime) desc) - 3";
             sql1 += " and DATEPART(YEAR, dia)=" + DateTime.Now.Year.ToString();
             sql1 += " order by CAST(dia+' ' + hora as datetime) asc";
 
@@ -150,80 +150,6 @@ namespace WebApiLBG.Controllers
                             Mes = "Dic.";
                         }
 
-                        
-                        //if (dr1[13].ToString().Trim() == "0")//por jugar
-                        //{
-                        //    if (dr1[17].ToString().Trim() == "0")//finalizado por retiro de equipo
-                        //    {
-
-                        //    }
-                        //    else
-                        //    {
-
-                        //    }
-                        //}
-                        //else if (dr1[13].ToString().Trim() == "1")//jugandose
-                        //{
-                        //    if (dr1[4].ToString().Trim() != "")
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[2].ToString().Trim() + "'/> " + dr1[2].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[4].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    else
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[2].ToString().Trim() + "'/> " + dr1[2].ToString().Trim() + "<span class='badge bg-blue pull-right'>0</span></h6> </div>";
-                        //    }
-                        //    if (dr1[5].ToString().Trim() != "")
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[3].ToString().Trim() + "'/> " + dr1[3].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[5].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    else
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[3].ToString().Trim() + "'/> " + dr1[3].ToString().Trim() + "<span class='badge bg-blue pull-right'>0</span></h6> </div>";
-                        //    }
-                        //    salida += "<span class='count_bottom'><i class='green'><i class='fa fa-clock-o'></i>" + dr1[14].ToString().Trim() + "m</i></span>";
-                        //}
-                        //else if (dr1[13].ToString().Trim() == "2")//finalizado
-                        //{
-                        //    if (dr1[4].ToString().Trim() != "")
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[2].ToString().Trim() + "'/> " + dr1[2].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[4].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    else
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[2].ToString().Trim() + "'/> " + dr1[2].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[15].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    if (dr1[5].ToString().Trim() != "")
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[3].ToString().Trim() + "'/> " + dr1[3].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[5].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    else
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[3].ToString().Trim() + "'/> " + dr1[3].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[16].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    salida += "<span class='count_bottom'><i class='green'><i class='fa fa-clock-o'></i> Finalizado </i></span>";
-                        //}
-                        //else if (dr1[13].ToString().Trim() == "D")//DESCANSO
-                        //{
-                        //    if (dr1[4].ToString().Trim() != "")
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[2].ToString().Trim() + "'/> " + dr1[2].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[4].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    else
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[2].ToString().Trim() + "'/> " + dr1[2].ToString().Trim() + "<span class='badge bg-blue pull-right'>0</span></h6> </div>";
-                        //    }
-                        //    if (dr1[5].ToString().Trim() != "")
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[3].ToString().Trim() + "'/> " + dr1[3].ToString().Trim() + "<span class='badge bg-blue pull-right'>" + dr1[5].ToString().Trim() + "</span></h6> </div>";
-                        //    }
-                        //    else
-                        //    {
-                        //        salida += "<div><h6><img Height='20px' Width='20px' src='logo.aspx?id=" + dr1[3].ToString().Trim() + "'/> " + dr1[3].ToString().Trim() + "<span class='badge bg-blue pull-right'>0</span></h6> </div>";
-                        //    }
-                        //    salida += "<span class='count_bottom'><i class='green'><i class='fa fa-clock-o'></i> Entretiempo </i></span>";
-                        //}
-                        //salida += "</div>";
-
                         PartidosFecha datos = new PartidosFecha();
                         datos.Dia = diasemana + " " + dia.Day.ToString() + " " + Mes;
                         datos.Hora= dr1[1].ToString().Trim();
@@ -239,7 +165,7 @@ namespace WebApiLBG.Controllers
                         }
                         else
                         {
-                            datos.Vocal = "Vocal Directivo";
+                            datos.Vocal = "Vocal: Directivo";
                         }
                         datos.Estado= dr1[13].ToString().Trim();
                         datos.Tiempo= dr1[14].ToString().Trim();

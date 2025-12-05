@@ -53,7 +53,7 @@ namespace WebApiLBG.Controllers
                     datos.Direccion = dr[3].ToString().Trim();
                     datos.Telefonos = dr[4].ToString().Trim();
                     datos.Email = dr[5].ToString().Trim();
-                    datos.Logo = "http://181.211.113.66/lbg1/logo.aspx?id=" + dr[1].ToString().Trim();
+                    datos.Logo = "http://181.39.104.93:5015/logo.aspx?id=" + dr[1].ToString().Trim();
                     listTabla.Add(datos);
                 }
             }
