@@ -159,13 +159,13 @@ namespace WebApiLBG.Controllers
                         datos.GolesVisitante= dr1[5].ToString().Trim();
                         datos.Categoria= dr1[8].ToString().Trim();
                         datos.Jugado= dr1[9].ToString().Trim();
-                        if (dr1[10].ToString().Trim() != "")
+                        if (dr1[10].ToString().Trim() != "")//vocal
                         {
-                            datos.Vocal = "Vocal: " + dr1[10].ToString().Trim();
+                            datos.Vocal = dr1[10].ToString().Trim();
                         }
                         else
                         {
-                            datos.Vocal = "Vocal: Directivo";
+                            datos.Vocal = "Directivo";
                         }
                         datos.Estado= dr1[13].ToString().Trim();
                         datos.Tiempo= dr1[14].ToString().Trim();
